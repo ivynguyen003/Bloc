@@ -4,46 +4,63 @@ function onReady() {
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
+
   function createNewToDo(){
     if (!newToDoText.value){return;}
     toDos.push({
         title: newToDoText.value,
-        complete: false,
-        id:id,
+        complete: false, //why set this to false//
+        id:id
      });
-     id++;
+      id++;
+      newToDoText.value = '';   
+      renderTheUI();
     }
-   function deleteToDo(id){
-       ToDos = toDos.filter(item => item.id !==id);
-       };
-    }
-    renderTheUI(){
+ console.log(id);
+  function deleteToDo(id){
+    console.log(toDos.filter(item => item.id !== id));
+
+  }
+
+   function renderTheUI(){
         const toDoList = document.getElementById('toDoList');
         toDoList.textContent = '';
+
         toDos.forEach(function(toDo){
-            const newToDo = document.createElement('li');
+            const newLi = document.createElement('li')
+            
             const checkbox = document.createElement('input');
             checkbox.type = "checkbox";
+
+            const deleteItem = document.createElement('button');
+            deleteItem.type = "button";
+
+
             const title = document.createElement('span');
-            const delete = document.createElement('delete')
-            newLi.textContent = toDo.title
+            title.textContent = toDo.title;
+
+            newLi.textContent = toDo.title;
+
+            newLi.appendChild(deleteItem);
             toDoList.appendChild(newLi);
             newLi.appendChild(checkbox);
+            
+            deleteItem.addEventListener('click', event => {
+            deleteToDo(toDo.id);
+            });
+
         });
     }
+
   addToDoForm.addEventListener('submit', event =>{
       event.preventDefault();
       createNewToDo();
       newToDoText.value = '';
       renderTheUI();
   });
-  addToDoForm.addEventListener('delete', event => {
-      event.preventDefault();
-      deleteToDo();
-      toDo.id;
-      renderTheUI();
-  });
+
 }
+
 window.onload = function (){
     alert("Done Loading!");
     onReady();
