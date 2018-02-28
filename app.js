@@ -11,15 +11,15 @@ function onReady() {
         title: newToDoText.value,
         complete: false, //why set this to false//
         id:id
-     });
-      id++;
-      newToDoText.value = '';   
-      renderTheUI();
-    }
- console.log(id);
-  function deleteToDo(id){
-    console.log(toDos.filter(item => item.id !== id));
+       });
+        id++;
+        newToDoText.value = '';   
+        renderTheUI();
+      }
 
+  function deleteToDo(id){
+    toDos = toDos.filter(item => item.id !== id);
+    renderTheUI();
   }
 
    function renderTheUI(){
