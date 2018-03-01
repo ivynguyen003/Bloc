@@ -22,6 +22,10 @@ function onReady() {
     renderTheUI();
   }
 
+  function storeToLocal(){
+    localStorage.setItem('storage',JSON.stringify(toDos));
+  }
+
    function renderTheUI(){
         const toDoList = document.getElementById('toDoList');
         toDoList.textContent = '';
@@ -49,6 +53,12 @@ function onReady() {
             deleteToDo(toDo.id);
             });
 
+            toDoList.addEventListener('change', event => {
+            toDos = complete.value;
+            });
+
+            storeToLocal();
+
         });
     }
 
@@ -61,7 +71,14 @@ function onReady() {
 
 }
 
+
+
 window.onload = function (){
-    alert("Done Loading!");
+    function retriveStorage(){
+      let retriveToDo = localStorage.getItem('storage')
+        if(!null){
+        toDos = JSON.parse(toDos);
+        }
+      };
     onReady();
 };
