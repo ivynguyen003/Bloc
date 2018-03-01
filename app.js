@@ -9,7 +9,7 @@ function onReady() {
     if (!newToDoText.value){return;}
     toDos.push({
         title: newToDoText.value,
-        complete: false, //why set this to false//
+        complete: false, //why set this to false?//
         id:id
        });
         id++;
@@ -20,6 +20,12 @@ function onReady() {
   function deleteToDo(id){
     toDos = toDos.filter(item => item.id !== id);
     renderTheUI();
+  }
+
+  function checkBox(check){
+    if (complete.value !== false){
+      complete.value === true;
+    }
   }
 
   function storeToLocal(){
@@ -54,11 +60,10 @@ function onReady() {
             });
 
             toDoList.addEventListener('change', event => {
-            toDos = complete.value;
+            checkBox(complete.value);
             });
 
             storeToLocal();
-
         });
     }
 
