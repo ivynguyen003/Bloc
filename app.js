@@ -1,6 +1,6 @@
 function onReady() { 
-  let toDos = JSON.parse(localStorage.getItem('toDos')) || [];
   let id = toDos[toDos.length - 1].id;
+  let toDos = JSON.parse(localStorage.getItem('toDos')) || [];
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
@@ -25,7 +25,11 @@ function onReady() {
   function toggleComplete (check){
     check.complete = !check.complete;
   }
-//question!
+
+  function storeToLocal(){
+    localStorage.setItem('toDos',JSON.stringify(toDos));
+  }//question!
+
   function renderTheUI(){
         const toDoList = document.getElementById('toDoList');
         toDoList.textContent = '';
