@@ -1,6 +1,6 @@
-function onReady() {
-  let id = 0;  
-  let toDos = [];
+function onReady() { 
+  let toDos = JSON.parse(localStorage.getItem('toDos')) || [];
+  let id = toDos[toDos.length - 1].id;
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
@@ -9,7 +9,7 @@ function onReady() {
     if (!newToDoText.value){return;}
     toDos.push({
         title: newToDoText.value,
-        complete: false, //why set this to false?//
+        complete: false, //question: why set this to false?//
         id:id
        });
         id++;
@@ -22,17 +22,11 @@ function onReady() {
     renderTheUI();
   }
 
-  function checkBox(check){
-    if (complete.value !== false){
-      complete.value === true;
-    }
+  function toggleComplete (check){
+    check.complete = !check.complete;
   }
-
-  function storeToLocal(){
-    localStorage.setItem('storage',JSON.stringify(toDos));
-  }
-
-   function renderTheUI(){
+//question!
+  function renderTheUI(){
         const toDoList = document.getElementById('toDoList');
         toDoList.textContent = '';
 
@@ -40,7 +34,8 @@ function onReady() {
             const newLi = document.createElement('li')
             
             const checkbox = document.createElement('input');
-            checkbox.type = "checkbox";
+            checkbox.type = "checkbox";//question: corresponding to html type/id?
+                                      // to have same styling in css?
 
             const deleteItem = document.createElement('button');
             deleteItem.type = "button";
@@ -59,8 +54,8 @@ function onReady() {
             deleteToDo(toDo.id);
             });
 
-            toDoList.addEventListener('change', event => {
-            checkBox(complete.value);
+            checkbox.addEventListener('change', event => {
+            toggleComplete(toDo);
             });
 
             storeToLocal();
@@ -76,14 +71,10 @@ function onReady() {
 
 }
 
-
-
 window.onload = function (){
     function retriveStorage(){
-      let retriveToDo = localStorage.getItem('storage')
-        if(!null){
-        toDos = JSON.parse(toDos);
-        }
-      };
+      retriveToDo = localStorage.getItem('toDos');
+      return retriveToDo;
+      };//question
     onReady();
 };
