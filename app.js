@@ -1,6 +1,6 @@
 function onReady() { 
   let toDos = JSON.parse(localStorage.getItem('toDos')) || [];// [0,1,2,3,4,5,6,7,8,9,10] index
-  let nextID = toDos.length?toDos[toDos.length].id : 0;// [0,1,2,3,4,5,6,7,8,10,9,10] ID
+  let nextID = toDos.length?toDos[toDos.length-1].id : 0;// [0,1,2,3,4,5,6,7,8,10,9,10] ID
   nextID++;
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
