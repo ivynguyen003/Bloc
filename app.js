@@ -1,6 +1,7 @@
 function onReady() { 
-  let id = toDos[toDos.length - 1].id;
-  let toDos = JSON.parse(localStorage.getItem('toDos')) || [];
+  let toDos = JSON.parse(localStorage.getItem('toDos')) || [];// [0,1,2,3,4,5,6,7,8,9,10] index
+  let nextID = toDos.length?toDos[toDos.length].id : 0;// [0,1,2,3,4,5,6,7,8,10,9,10] ID
+  nextID++;
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
@@ -10,9 +11,9 @@ function onReady() {
     toDos.push({
         title: newToDoText.value,
         complete: false, //question: why set this to false?//
-        id:id
+        id:nextID
        });
-        id++;
+        nextID++;
         newToDoText.value = '';   
         renderTheUI();
       }
@@ -20,6 +21,7 @@ function onReady() {
   function deleteToDo(id){
     toDos = toDos.filter(item => item.id !== id);
     renderTheUI();
+    storeToLocal();
   }
 
   function toggleComplete (check){
@@ -62,7 +64,6 @@ function onReady() {
             toggleComplete(toDo);
             });
 
-            storeToLocal();
         });
     }
 
@@ -71,14 +72,12 @@ function onReady() {
       createNewToDo();
       newToDoText.value = '';
       renderTheUI();
+      storeToLocal();
   });
 
+  renderTheUI();
 }
 
 window.onload = function (){
-    function retriveStorage(){
-      retriveToDo = localStorage.getItem('toDos');
-      return retriveToDo;
-      };//question
     onReady();
 };
