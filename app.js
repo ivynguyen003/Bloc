@@ -60,7 +60,6 @@ function onReady() {
       renderTheUI();
   });
 
->>>>>>> toDoList-checkpoint11
 }
 
 window.onload = function (){
