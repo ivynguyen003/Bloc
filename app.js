@@ -45,6 +45,7 @@ function onReady() {
 
             const deleteItem = document.createElement('button');
             deleteItem.type = "button";
+            deleteItem.textContent = "delete";
 
 
             const title = document.createElement('span');
